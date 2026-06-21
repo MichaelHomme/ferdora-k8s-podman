@@ -115,3 +115,20 @@ kubectl get all -l k8s-app=fluentd-agent -o wide
 kubectl delete ds fluentd-agent
 kubectl get ds,po -l k8s-app=fluentd-agent
 ```
+
+## Services
+
+```bash
+
+minikube profile list
+kubectl run pod-hello --image=pbitty/hello-from:latest --port=80 --expose=true
+kubectl describe svc pod-hello
+minikube ssh
+kubectl edit svc pod-hello
+kubectl create deployment deploy-hello --image=pbitty/hello-from:latest --port=80 --replicas=3
+kubectl expose deployment deploy-hello --type=NodePort
+kubectl get deploy,po,svc,ep --show-labels
+minikube service --all
+curl http://192.168.58.2:30953
+kubectl get po,svc,ep --show-labels
+```
